@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teacher Rating & Review</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #f8f9fa;
+            text-align: center;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .rating {
+            display: flex;
+            justify-content: center;
+            flex-direction: row-reverse;
+        }
+
+        .rating input {
+            display: none;
+        }
+
+        .rating label {
+            font-size: 30px;
+            color: gray;
+            cursor: pointer;
+            padding: 5px;
+        }
+
+        .rating input:checked ~ label {
+            color: gold;
+        }
+
+        textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-top: 5px;
+        }
+
+        button {
+            background: teal;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            background: #218838;
+        }
+
+        #teacher {
+            margin-bottom: 15px;
+        }
+
+        .rating-container {
+            display: block;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Rate Your Teacher</h2>
+        <form id="reviewForm">
+            <label for="teacher">Select Teacher:</label>
+            <select id="teacher" name="teacher">
+                <option value="1">Mr. John (Math)</option>
+                <option value="2">Ms. Sarah (Science)</option>
+                <option value="3">Mr. David (English)</option>
+            </select>
+            
+            <div class="rating-container">
+                <label for="rating">Rating:</label>
+                <div class="rating">
+                    <input type="radio" name="rating" value="5" id="star5"><label for="star5">★</label>
+                    <input type="radio" name="rating" value="4" id="star4"><label for="star4">★</label>
+                    <input type="radio" name="rating" value="3" id="star3"><label for="star3">★</label>
+                    <input type="radio" name="rating" value="2" id="star2"><label for="star2">★</label>
+                    <input type="radio" name="rating" value="1" id="star1"><label for="star1">★</label>
+                </div>
+            </div>
+            
+            <label for="review">Review:</label>
+            <textarea id="review" name="review" rows="4" placeholder="Enter the message here" required></textarea>
+
+            <button type="submit">Submit Review</button>
+        </form>
+
+        <h3>Previous Reviews</h3>
+        <div id="reviews">
+            <p><strong>Mr. John:</strong> 5 ⭐ - "Great teaching!"</p>
+            <p><strong>Ms. Sarah:</strong> 4 ⭐ - "Very informative."</p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

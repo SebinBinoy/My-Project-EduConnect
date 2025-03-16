@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduConnect</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: #f8f9fa;
+        }
+
+        
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 10%;
+            background: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 100;
+        }
+
+        .navbar h1 {
+            font-size: 24px;
+            font-weight: bold;
+            font-family: 'Poppins';
+            font-size: xx-large;
+            font-style: normal;
+            
+        }
+
+        .navbar ul {
+            list-style: none;
+            display: flex;
+            gap: 20px;
+        }
+
+        .navbar ul li {
+            display: inline;
+        }
+
+        .navbar ul li a {
+            text-decoration: none;
+            color: black;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .navbar ul li a:hover {
+            color: teal;
+        }
+
+        .btn {
+            background: teal;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            background: darkcyan;
+        }
+
+        
+        .hero {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 100px 10%;
+            margin-top: 60px;
+        }
+
+        .hero-text {
+            max-width: 500px;
+        }
+
+        .hero-text h1 {
+            font-size: 36px;
+            font-weight: 700;
+            color: black;
+        }
+
+        .hero-text h1 span {
+            color: teal;
+        }
+
+        .hero-text p {
+            margin: 20px 0;
+            color: #555;
+        }
+        .hero-text a{
+            text-decoration: none;
+        }
+        .hero-text a:hover{
+            text-decoration: underline;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 15px;
+        }
+
+        .hero img {
+            width: 700px;
+            border-radius: 10px;
+            height: 450px;
+        }
+
+        @media (max-width: 768px) {
+            .hero {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .hero img {
+                width: 90%;
+                margin-top: 20px;
+            }
+        }
+
+        .footer {
+            background: #222;
+            color: white;
+            padding: 30px 10%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .footer .footer-logo {
+            font-size: 22px;
+            font-weight: 700;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 20px;
+        }
+
+        .footer-links a {
+            color: white;
+            text-decoration: none;
+            font-size: 14px;
+            transition: 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: teal;
+        }
+
+        .footer-contact {
+            font-size: 14px;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            background: #111;
+            color: white;
+            padding: 10px 0;
+            font-size: 12px;
+        }
+
+        .edu{
+            color: teal;
+        }
+
+        @media (max-width: 768px) {
+            .footer {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .footer-links {
+                flex-direction: column;
+                gap: 10px;
+                margin: 15px 0;
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+    
+    <nav class="navbar">
+        <h1><span class="edu">🍃Edu</span>Connect</h1>
+        <ul>
+            <li><a href="login.html">Login</a></li>
+           
+            <li><a href="cont.html">Contact Us</a></li>
+            <li><a href="a.html">About Us</a></li>
+        </ul>
+    </nav>
+
+    
+    <section class="hero">
+        <div class="hero-text">
+            <h1>Unlock Your <span>Learning Potential</span> with EduConnect</h1>
+            <p>EduConnect offers dynamic and engaging online learning tailored for SSLC students. Connect with top educators in Physics, Chemistry, and Mathematics through interactive demo videos.</p>
+            <div class="hero-buttons">
+                <a href="signup.html"class="btn">Get Started</a>
+            </div>
+        </div>
+        <img src="https://res.cloudinary.com/dpzorj6n1/image/upload/v1740200665/online-courses-what-students-want_zzecow.jpg" alt="Student Learning">
+    </section>
+
+    <footer class="footer">
+        <div class="footer-logo">EduConnect</div>
+        <div class="footer-links">
+            <a href="policy.html">Privacy Policy</a>
+            <a href="trems.html">Terms of Service</a>
+           
+        </div>
+        <div class="footer-contact">
+            📧 support@educonnect.com <br>
+            📍 123 Learning St, Knowledge City
+        </div>
+    </footer>
+
+   
+    <div class="footer-bottom">
+        © 2025 EduConnect. All Rights Reserved.
+    </div>
+
+</body>
+</html>

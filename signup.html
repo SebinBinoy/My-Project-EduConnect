@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up - EduConnect</title>
+    
+    <script>
+        function toggleFields() {
+            var role = document.getElementById("role").value;
+            var teacherFields = document.getElementById("teacher-fields");
+            var studentFields = document.getElementById("student-fields");
+
+            if (role === "teacher") {
+                teacherFields.style.display = "block";
+                studentFields.style.display = "none";
+            } else {
+                teacherFields.style.display = "none";
+                studentFields.style.display = "block";
+            }
+        }
+    </script>
+</head>
+<body>
+
+    <div class="register-container">
+        <h2>Create an Account</h2>
+        <form action="dashboard.html" method="POST">
+            <input type="text" name="full_name" placeholder="Full Name" required>
+            <input type="email" name="email" placeholder="Email Address" required>
+            <input type="password" name="password" placeholder="Create Password" required>
+            <input type="password" name="confirm_password" placeholder="Confirm Password" required>
+            <br>
+            <label for="role">I am a:</label><br>
+            <select id="role" name="role" onchange="toggleFields()">
+                <option value="student">Student</option>
+                <option value="teacher">Teacher</option>
+            </select>
+
+            
+            <div id="student-fields">
+                <label for="profile_picture">Upload Profile Picture:</label>
+            <input type="file" id="profile_picture" name="profile_picture" accept="image/*" onchange="previewImage(event)">
+            <img id="preview" src="" alt="Profile Preview" style="display:none; width:100px; height:100px; border-radius:50%; margin-top:10px;">
+
+            </div>
+
+            
+            <div id="teacher-fields" style="display: none;">
+                <input type="number" name="experience" placeholder="Years of Experience">
+                <label for="subject">Subjects You Teach:</label>
+                <select name="subject">
+                    <option value="math">Mathematics</option>
+                    <option value="phy">Physics</option>
+                    <option value="chem">Chemistry</option>
+                </select>
+                <label for="profile_pic">Upload Profile Picture:</label>
+                <input type="file" name="profile_pic">
+                <label for="demo_video">Upload Demo Video:</label>
+                <input type="file" name="demo_video">
+            </div>
+
+            <button type="submit">Sign Up</button>
+        </form>
+        <p>Already have an account? <a href="login.html">Login here</a></p>
+    </div>
+
+</body>
+</html>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+        background-image: url("https://res.cloudinary.com/dpzorj6n1/image/upload/v1742041127/image_tzfkye.png");
+        height: 100vh;
+        background-size: cover;
+    }
+    
+    
+    .register-container {
+        background-color: rgb(255, 255, 255,0.8);
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
+        text-align: center;
+        width: 350px;
+        
+    }
+    
+    h2 {
+        margin-bottom: 15px;
+        color: #591616;
+    }
+    
+    input, select, button {
+        width: 90%;
+        padding: 10px;
+        margin: 8px 0;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+    }
+    
+    
+    button {
+        background-color: teal;
+        color: white;
+        font-size: 16px;
+        border: none;
+        cursor: pointer;
+    }
+    
+    button:hover {
+        background-color: teal;
+    }
+    
+    
+    #teacher-fields, #student-fields {
+        display: none;
+    }
+    
+    
+    p {
+        margin-top: 10px;
+    }
+    
+    a {
+        font-weight: bold;
+        text-decoration: none;
+        color:black;
+    }
+    
+    a:hover {
+        text-decoration: underline;
+    }
+    </style>

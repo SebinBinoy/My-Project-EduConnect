@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduConnect - Login</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            background: url('https://res.cloudinary.com/dpzorj6n1/image/upload/v1742043606/Screenshot_2025-03-15_182936_sq0l9i.png');
+            height: 100vh;
+            background-size: cover;
+        }
+
+        .login-container {
+            text-align: center;
+            background-color: rgba(255, 255, 255, 0.8);
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+            width: 320px;
+        }
+
+        h2 {
+            margin-bottom: 20px;
+            color: #591616;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+            text-align: left;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: #555;
+        }
+
+        input {
+            width: 90%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: teal;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            background-color: teal;
+        }
+
+        .role-selection {
+            margin-bottom: 15px;
+        }
+
+        select {
+            width: 100%;
+            padding: 8px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            text-align: center;
+        }
+
+        p {
+            margin-top: 10px;
+            color: #666;
+        }
+
+        a {
+            font-weight: bold;
+            color: black;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="login-container">
+        <h2>Login As</h2>
+        <div class="role-selection">
+            <select id="role" onchange="updateLoginHeading()">
+                <option value="" selected disabled>Select Role</option>
+                <option value="Student">Student</option>
+                <option value="Teacher">Teacher</option>
+                <option value="Admin">Admin</option>
+            </select>
+        </div>
+
+        <h2 id="loginTitle">Login</h2>
+        <form>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" placeholder="Enter your email" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" placeholder="Enter your password" required>
+            </div>
+            <button type="submit">Login</button>
+        </form>
+        <p><a href="frp.html">Forgot Password?</a></p>
+        <p>Don't have an account? <a href="signup.html">Sign up</a></p>
+    </div>
+
+    <script>
+        function updateLoginHeading() {
+            let role = document.getElementById("role").value;
+            document.getElementById("loginTitle").innerText = role + " Login";
+        }
+    </script>
+
+</body>
+</html>
