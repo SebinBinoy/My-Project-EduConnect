@@ -4,6 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EduConnect - Login</title>
+
+    <!-- Toastr CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+    
     <style>
         body {
             display: flex;
@@ -13,7 +17,6 @@
             font-family: Arial, sans-serif;
             margin: 0;
             background: url('https://res.cloudinary.com/dpzorj6n1/image/upload/v1742043606/Screenshot_2025-03-15_182936_sq0l9i.png');
-            height: 100vh;
             background-size: cover;
         }
 
@@ -62,19 +65,7 @@
         }
 
         button:hover {
-            background-color: teal;
-        }
-
-        .role-selection {
-            margin-bottom: 15px;
-        }
-
-        select {
-            width: 100%;
-            padding: 8px;
-            border-radius: 5px;
-            border: 1px solid #ccc;
-            text-align: center;
+            background-color: darkslategray;
         }
 
         p {
@@ -96,37 +87,70 @@
 <body>
 
     <div class="login-container">
-        <h2>Login As</h2>
-        <div class="role-selection">
-            <select id="role" onchange="updateLoginHeading()">
-                <option value="" selected disabled>Select Role</option>
-                <option value="Student">Student</option>
-                <option value="Teacher">Teacher</option>
-                <option value="Admin">Admin</option>
-            </select>
-        </div>
-
-        <h2 id="loginTitle">Login</h2>
-        <form>
+        <h2>Login</h2>
+        <form id="login-form">
             <div class="form-group">
-                <label for="email">Email</label>
-                <input type="email" id="email" placeholder="Enter your email" required>
+                <label for="login-email">Email</label>
+                <input id="login-email" type="email" placeholder="Enter your email" required>
             </div>
             <div class="form-group">
-                <label for="password">Password</label>
-                <input type="password" id="password" placeholder="Enter your password" required>
+                <label for="login-password">Password</label>
+                <input id="login-password" type="password" placeholder="Enter your password" required>
             </div>
-            <button type="submit">Login</button>
+            <button id="login-button" type="submit">Login</button>
         </form>
         <p><a href="frp.html">Forgot Password?</a></p>
         <p>Don't have an account? <a href="signup.html">Sign up</a></p>
     </div>
 
+    <!-- jQuery (Required for Toastr) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <!-- Toastr.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
     <script>
-        function updateLoginHeading() {
-            let role = document.getElementById("role").value;
-            document.getElementById("loginTitle").innerText = role + " Login";
-        }
+        $(document).ready(function() {
+            $("#login-form").submit(async function(event) {
+                event.preventDefault();
+
+                const email = $("#login-email").val();
+                const password = $("#login-password").val();
+
+                if (!email || !password) {
+                    toastr.error("Please fill in all fields!");
+                    return;
+                }
+
+                try {
+                    const response = await fetch("http://localhost:3000/api/user/login-user", {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({ userEmail: email, userPassword: password })
+                    });
+
+                    const data = await response.json();
+
+                    if (response.status === 200) {
+                        console.log(data);
+                        toastr.success("Login successful! Redirecting...");
+                        localStorage.setItem("token", data.token);
+                        localStorage.setItem("userID", data.userID);
+                        setTimeout(() => {
+                            if(data.userRole === 'student'){
+                                window.location.href = "student.html"
+                            }else{
+                                window.location.href = "teacher.html"
+                            }; // Redirect to dashboard
+                        }, 2000);
+                    } else {
+                        toastr.error(data.message || "Invalid credentials!");
+                    }
+                } catch (error) {
+                    toastr.error("Something went wrong!");
+                    console.error(error);
+                }
+            });
+        });
     </script>
 
 </body>
