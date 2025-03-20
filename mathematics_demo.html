@@ -1,0 +1,174 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mathematics Demo Classes | EduConnect</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            display: flex;
+            background: #f4f4f4;
+        }
+
+        /* Sidebar Styles */
+        .sidebar {
+            width: 250px;
+            height: 100vh;
+            background: white;
+            padding: 20px;
+            position: fixed;
+            left: 0;
+            top: 0;
+            overflow-y: auto;
+            z-index: 1000;
+        }
+
+        .edu {
+            color: teal;
+        }
+
+        .sidebar h2 {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .sidebar ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .sidebar ul li {
+            padding: 12px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: background 0.3s;
+        }
+
+        .sidebar ul li:hover {
+            background: #e8f5e9;
+            border-radius: 5px;
+        }
+
+        /* Main Content */
+        .main-content {
+            margin-left: 270px;
+            padding: 20px;
+            flex: 1;
+            width: calc(100% - 290px);
+            box-sizing: border-box;
+        }
+
+        /* Videos Grid Layout */
+        .videos-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            padding: 15px 0;
+            margin-left: 10px;
+        }
+
+        .video-container {
+            background: white;
+            border-radius: 10px;
+            max-width: 280px; 
+            padding: 12px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin: 0 auto;
+        }
+
+        .video-player iframe {
+            width: 100%;
+            aspect-ratio: 16/9;
+            border-radius: 8px;
+            height: 160px; 
+        }
+
+        .video-title {
+            font-size: 18px;
+            color: #333;
+            margin: 10px 0;
+        }
+
+        .video-description {
+            font-size: 14px;
+            color: #666;
+            line-height: 1.4;
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                 width: 200px; }
+            .main-content {
+                 margin-left: 220px; 
+                 width: calc(100% - 240px);}
+        }
+
+        @media (max-width: 480px) {
+            .sidebar { width: 180px; }
+            .main-content { margin-left: 200px; width: calc(100% - 220px);}
+        }
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <h2><span class="edu">Edu</span>Connect</h2>
+        <ul>
+            <li><a href="student_dash.html" style="text-decoration: none; color: inherit;">🏠 Dashboard</a></li>
+            <li>👨🏻‍🎓 My Courses</li>
+            <li><a href="subject_list.html" style="text-decoration: none; color: inherit;">🎥 Demo Classes</a></li>
+            <li>📚 Study Materials</li>
+            <li>💳 My Payments</li>
+            <li class="logout">🔐 Logout</li>
+        </ul>
+    </div>
+
+    <div class="main-content">
+        <h2> Mathematics Demo Classes</h2>
+        <div class="videos-grid">
+            <div class="video-container">
+                <div class="video-player">
+                    <iframe 
+                        src="https://www.youtube.com/embed/zswrUj2PpXI" 
+                        title="Calculus Introduction"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                        allowfullscreen>
+                    </iframe>
+                </div>
+                <h3 class="video-title">Introduction to Calculus</h3>
+                <p class="video-description">Learn the fundamentals of calculus including limits and derivatives.</p>
+            </div>
+
+            <div class="video-container">
+                <div class="video-player">
+                    <iframe 
+                        src="https://www.youtube.com/embed/N-qXzJ9g-Lw" 
+                        title="Algebra Basics"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                        allowfullscreen>
+                    </iframe>
+                </div>
+                <h3 class="video-title">Algebra Fundamentals</h3>
+                <p class="video-description">Master the basics of algebraic expressions and equations.</p>
+            </div>
+
+            <div class="video-container">
+                <div class="video-player">
+                    <iframe 
+                        src="https://www.youtube.com/embed/WUvTyaaNkzM" 
+                        title="Trigonometry"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                        allowfullscreen>
+                    </iframe>
+                </div>
+                <h3 class="video-title">Trigonometry Basics</h3>
+                <p class="video-description">Understanding sine, cosine, and triangles.</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

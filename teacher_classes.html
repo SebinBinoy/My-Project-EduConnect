@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload Classes | EduConnect</title>
+    <style>
+        /* ... existing sidebar and general styles from teacher_dash.html ... */
+         /* General Styles */
+         body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            display: flex;
+            background: #f4f4f4;
+        }
+
+        /* Sidebar */
+        .edu {
+            color: teal;
+        }
+
+        .sidebar {
+            width: 250px;
+            height: 100vh;
+            background: white;
+            color: black;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .sidebar h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .sidebar ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .sidebar ul li {
+            padding: 12px;
+            font-size: 16px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: background 0.3s ease-in-out;
+        }
+
+        .sidebar ul li:hover {
+            background: teal;
+            color: white;
+            border-radius: 5px;
+        }
+
+        .sidebar .logout {
+            margin-top: auto;
+            color: #f85c5c;
+        }
+
+        .classes-container {
+            padding: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .upload-section {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: #333;
+            font-weight: bold;
+        }
+
+        select, input[type="text"], textarea {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            margin-bottom: 10px;
+        }
+
+        .video-preview {
+            max-width: 100%;
+            margin: 10px 0;
+        }
+
+        .upload-btn {
+            background: teal;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .upload-btn:hover {
+            background: #006666;
+        }
+
+        .video-list {
+            margin-top: 30px;
+        }
+
+        .video-card {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .video-info h3 {
+            margin: 0;
+            color: #333;
+        }
+
+        .video-actions button {
+            padding: 5px 10px;
+            margin-left: 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .status-badge {
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .status-demo {
+            background: #e3f2fd;
+            color: #1565c0;
+        }
+
+        .status-actual {
+            background: #e8f5e9;
+            color: #2e7d32;
+        }
+            /* Main content layout */
+    .main-content {
+        flex: 1;
+        margin-left: 250px;
+        padding: 20px;
+        background: #f4f4f4;
+        min-height: 100vh;
+    }
+
+    /* Header styles */
+    .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 30px;
+        background: white;
+        padding: 15px 20px;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    /* File input styling */
+    input[type="file"] {
+        padding: 10px;
+        border: 2px dashed #ddd;
+        border-radius: 4px;
+        width: 100%;
+        cursor: pointer;
+    }
+
+    input[type="file"]:hover {
+        border-color: teal;
+    }
+
+    /* Video card improvements */
+    .video-card {
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        background: white;
+    }
+
+    .video-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
+
+    /* Action buttons */
+    .video-actions button {
+        background: teal;
+        color: white;
+        padding: 8px 16px;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: background 0.3s;
+    }
+
+    .video-actions button:hover {
+        background: #004d4d;
+    }
+
+    .video-actions button.delete {
+        background: #dc3545;
+    }
+
+    .video-actions button.delete:hover {
+        background: #bd2130;
+    }
+
+    /* Loading state */
+    .loading {
+        text-align: center;
+        padding: 20px;
+        color: #666;
+    }
+
+    /* Empty state */
+    .empty-state {
+        text-align: center;
+        padding: 40px;
+        color: #666;
+        background: white;
+        border-radius: 8px;
+        margin-top: 20px;
+    }
+
+    /* Video preview container */
+    .video-preview-container {
+        margin: 15px 0;
+        background: #f8f9fa;
+        padding: 10px;
+        border-radius: 4px;
+    }
+
+    /* Progress bar for upload */
+    .progress-bar {
+        width: 100%;
+        height: 4px;
+        background: #ddd;
+        border-radius: 2px;
+        margin-top: 10px;
+    }
+
+    .progress-bar .progress {
+        height: 100%;
+        background: teal;
+        border-radius: 2px;
+        width: 0;
+        transition: width 0.3s ease;
+    }
+
+    /* Responsive design improvements */
+    @media (max-width: 768px) {
+        .main-content {
+            margin-left: 0;
+        }
+
+        .sidebar {
+            position: fixed;
+            transform: translateX(-100%);
+            z-index: 1000;
+            transition: transform 0.3s ease;
+        }
+
+        .sidebar.active {
+            transform: translateX(0);
+        }
+
+        .classes-container {
+            padding: 10px;
+        }
+
+        .video-card {
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .video-actions {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+        }
+    }
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <!-- ... Copy sidebar from teacher_dash.html ... -->
+        <h2><span class="edu">Edu</span>Connect</h2>
+        <ul>
+            <li><a href="home.html" style="text-decoration: none; color: inherit;">🏠 Home</a></li>
+            <li><i class="fas fa-chalkboard-teacher"></i>👨‍🏫 My Classes</li>
+            <li><i class="fas fa-tasks"></i>📕 Assignments</li>
+            <li><i class="fas fa-wallet"></i>💳 Payments</li>
+            <li class="logout"><i class="fas fa-sign-out-alt"></i>🔐 Logout</li>
+        </ul>
+    </div>
+
+    <div class="main-content">
+        <div class="header">
+            <h2>Upload Classes</h2>
+            <div class="profile"><span>T</span></div>
+        </div>
+
+        <div class="classes-container">
+            <div class="upload-section">
+                <h3>Upload New Class</h3>
+                <form id="uploadClassForm">
+                    <div class="form-group">
+                        <label>Class Type</label>
+                        <select id="classType" required>
+                            <option value="">Select Type</option>
+                            <option value="demo">Demo Class</option>
+                            <option value="actual">Actual Class</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Subject</label>
+                        <select id="subject" required>
+                            <option value="">Select Subject</option>
+                            <option value="mathematics">Mathematics</option>
+                            <option value="physics">Physics</option>
+                            <option value="chemistry">Chemistry</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Topic</label>
+                        <input type="text" id="topic" required placeholder="Enter topic name">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Description</label>
+                        <textarea id="description" rows="4" placeholder="Brief description about the class"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Video File</label>
+                        <input type="file" id="videoFile" accept="video/*" required>
+                        <video class="video-preview" id="videoPreview" controls style="display: none;"></video>
+                    </div>
+
+                    <button type="submit" class="upload-btn">Upload Class</button>
+                </form>
+            </div>
+
+            <div class="video-list">
+                <h3>My Classes</h3>
+                <div id="classesContainer">
+                    
+                    <!-- Classes will be dynamically added here -->
+                    <!-- Add inside the classesContainer div -->
+               <div class="empty-state" id="emptyState" style="display: none;">
+               <h3>No Classes Yet</h3>
+               <p>Upload your first class using the form above</p>
+              </div>
+
+         <div class="loading" id="loading" style="display: none;">
+          <p>Loading classes...</p>
+          </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const videoFile = document.getElementById('videoFile');
+            const videoPreview = document.getElementById('videoPreview');
+            const uploadForm = document.getElementById('uploadClassForm');
+            const classesContainer = document.getElementById('classesContainer');
+
+            // Show video preview
+            videoFile.addEventListener('change', (e) => {
+                const file = e.target.files[0];
+                if (file) {
+                    const videoUrl = URL.createObjectURL(file);
+                    videoPreview.src = videoUrl;
+                    videoPreview.style.display = 'block';
+                }
+            });
+
+            // Handle form submission
+            uploadForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+
+                const formData = new FormData();
+                formData.append('classType', document.getElementById('classType').value);
+                formData.append('subject', document.getElementById('subject').value);
+                formData.append('topic', document.getElementById('topic').value);
+                formData.append('description', document.getElementById('description').value);
+                formData.append('video', videoFile.files[0]);
+                formData.append('teacherId', localStorage.getItem('teacherId'));
+
+                try {
+                    const response = await fetch('http://localhost:3000/api/teacher/upload-class', {
+                        method: 'POST',
+                        body: formData
+                    });
+
+                    const result = await response.json();
+                    if (result.success) {
+                        alert('Class uploaded successfully!');
+                        uploadForm.reset();
+                        videoPreview.style.display = 'none';
+                        loadClasses(); // Refresh the list
+                    } else {
+                        alert('Error uploading class: ' + result.message);
+                    }
+                } catch (error) {
+                    console.error('Error:', error);
+                    alert('Error uploading class. Please try again.');
+                }
+            });
+
+            // Load existing classes
+            async function loadClasses() {
+                try {
+                    const teacherId = localStorage.getItem('teacherId');
+                    const response = await fetch(`http://localhost:3000/api/teacher/classes/${teacherId}`);
+                    const result = await response.json();
+
+                    if (result.success) {
+                        classesContainer.innerHTML = result.data.map(classData => `
+                            <div class="video-card">
+                                <div class="video-info">
+                                    <h3>${classData.topic}</h3>
+                                    <p>${classData.subject} - 
+                                        <span class="status-badge status-${classData.classType}">
+                                            ${classData.classType.toUpperCase()}
+                                        </span>
+                                    </p>
+                                </div>
+                                <div class="video-actions">
+                                    <button onclick="viewClass('${classData._id}')">View</button>
+                                    <button onclick="deleteClass('${classData._id}')">Delete</button>
+                                </div>
+                            </div>
+                        `).join('');
+                    }
+                } catch (error) {
+                    console.error('Error loading classes:', error);
+                }
+            }
+
+            // Load classes when page loads
+            loadClasses();
+        });
+    </script>
+</body>
+</html>

@@ -23,8 +23,7 @@ const registerUser = async (req, res) => {
             userEmail,
             userPassword: hashedPassword,
             userRole,
-            userExperience: userRole === "teacher" ? userExperience : undefined, 
-            userSubject: userRole === "teacher" ? userSubject : undefined
+            
         });
 
         await newUser.save();

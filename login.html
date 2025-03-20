@@ -112,42 +112,67 @@
         $(document).ready(function() {
             $("#login-form").submit(async function(event) {
                 event.preventDefault();
-
+    
                 const email = $("#login-email").val();
                 const password = $("#login-password").val();
-
+    
                 if (!email || !password) {
                     toastr.error("Please fill in all fields!");
                     return;
                 }
-
+    
                 try {
                     const response = await fetch("http://localhost:3000/api/user/login-user", {
                         method: "POST",
                         headers: { "Content-Type": "application/json" },
                         body: JSON.stringify({ userEmail: email, userPassword: password })
                     });
-
+    
                     const data = await response.json();
-
+    
                     if (response.status === 200) {
-                        console.log(data);
-                        toastr.success("Login successful! Redirecting...");
                         localStorage.setItem("token", data.token);
                         localStorage.setItem("userID", data.userID);
-                        setTimeout(() => {
-                            if(data.userRole === 'student'){
-                                window.location.href = "student.html"
-                            }else{
-                                window.location.href = "teacher.html"
-                            }; // Redirect to dashboard
-                        }, 2000);
+    
+                        if (data.userRole === 'student') {
+                            toastr.success("Login successful! Redirecting to student dashboard...");
+                            setTimeout(() => {
+                                window.location.href = "student_dash.html";
+                            }, 2000);
+                        } else {
+                            // Teacher profile check
+                            try {
+                                const profileResponse = await fetch(`http://localhost:3000/api/teacher/profile/check/${data.userID}`, {
+                                    headers: {
+                                        'Authorization': `Bearer ${data.token}`
+                                    }
+                                });
+                                
+                                const profileData = await profileResponse.json();
+    
+                                if (profileData.exists) {
+                                    localStorage.setItem("teacherId", profileData.teacherId);
+                                    toastr.success("Login successful! Redirecting to dashboard...");
+                                    setTimeout(() => {
+                                        window.location.href = "teacher_dash.html";
+                                    }, 2000);
+                                } else {
+                                    toastr.info("Please complete your profile first...");
+                                    setTimeout(() => {
+                                        window.location.href = "tr_profile.html";
+                                    }, 2000);
+                                }
+                            } catch (error) {
+                                console.error("Error checking profile:", error);
+                                toastr.error("Error checking profile status!");
+                            }
+                        }
                     } else {
                         toastr.error(data.message || "Invalid credentials!");
                     }
                 } catch (error) {
-                    toastr.error("Something went wrong!");
-                    console.error(error);
+                    console.error("Login error:", error);
+                    toastr.error("Error connecting to server!");
                 }
             });
         });

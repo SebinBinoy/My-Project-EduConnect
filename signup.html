@@ -91,25 +91,10 @@
             </select>
 
             <!-- Student-Specific Fields -->
-            <div id="student-fields">
-                <label for="profile_picture">Upload Profile Picture:</label>
-                <input type="file" id="profile_picture" name="profile_picture" accept="image/*">
-            </div>
+           
 
             <!-- Teacher-Specific Fields -->
-            <div id="teacher-fields">
-                <input id="user-experience" type="number" placeholder="Years of Experience">
-                <label for="user-subject">Subjects You Teach:</label>
-                <select id="user-subject">
-                    <option value="math">Mathematics</option>
-                    <option value="phy">Physics</option>
-                    <option value="chem">Chemistry</option>
-                </select>
-                <label for="profile_pic">Upload Profile Picture:</label>
-                <input type="file" name="profile_pic">
-                <label for="demo_video">Upload Demo Video:</label>
-                <input type="file" name="demo_video">
-            </div>
+            
 
             <button id="user-submit-signup" type="submit">Sign Up</button>
         </form>
@@ -161,8 +146,7 @@
                 const password = document.getElementById("user-create-password").value;
                 const confirmPassword = document.getElementById("user-confirm-password").value;
                 const role = document.getElementById("user-role").value;
-                const experience = role === "teacher" ? document.getElementById("user-experience").value : undefined;
-                const subject = role === "teacher" ? document.getElementById("user-subject").value : undefined;
+               
 
                 // Basic Validations
                 if (!fullName || !email || !password || !confirmPassword || !role) {
@@ -175,10 +159,7 @@
                     return;
                 }
 
-                if (role === "teacher" && (!experience || !subject)) {
-                    toastr.error("Teachers must provide experience and a subject!");
-                    return;
-                }
+                
 
                 const userData = {
                     userFullName: fullName,
@@ -187,10 +168,7 @@
                     userRole: role
                 };
 
-                if (role === "teacher") {
-                    userData.userExperience = experience;
-                    userData.userSubject = subject;
-                }
+                
 
                 try {
                     const response = await fetch("http://localhost:3000/api/user/register-user", {

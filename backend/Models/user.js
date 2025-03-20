@@ -19,18 +19,7 @@ const userSchema = new mongoose.Schema({
         required: true,
         enum: ["student", "teacher"] // Restricts values to only "student" or "teacher"
     },
-    userExperience: {
-        type: String,
-        required: function () {
-            return this.userRole === "teacher"; // Required only if role is "teacher"
-        }
-    },
-    userSubject: {
-        type: String,
-        required: function () {
-            return this.userRole === "teacher"; // Required only if role is "teacher"
-        }
-    }
+   
 });
 
 const userModel = mongoose.model("user", userSchema);

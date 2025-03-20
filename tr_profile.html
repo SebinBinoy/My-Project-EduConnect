@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teacher Profile | EduConnect</title>
+    <style>
+        body {
+            background-color: rgb(247, 224, 195);
+        }
+        
+        .navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 10%;
+    background: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    position: fixed;
+    width: 80%;
+    top: 0;
+    z-index: 100;
+    height:50px;
+}
+
+.navbar h1 {
+    font-size: 24px;
+    font-weight: bold;
+    font-family: 'Poppins';
+    font-size: xx-large;
+    font-style: normal;
+}
+
+.navbar ul {
+    list-style: none;
+    display: flex;
+    gap: 10px;
+    margin-left: auto; /* Add this line */
+     /* Add this line */
+
+}
+
+.navbar ul li {
+    display: inline;
+}
+
+.navbar ul li a {
+    text-decoration: none;
+    color: black;
+    font-weight: 500;
+    transition: color 0.3s;
+}
+
+.navbar ul li a:hover {
+    color: teal;
+}
+
+.edu {
+    color: teal;
+}
+
+        /* Main Content */
+        .main-content {
+            margin-top: 100px;
+            margin: 0 auto; /* Center the content */
+            padding: 20px;
+            max-width: 800px; /* Limit width for readability */
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        /* Form Styles */
+        .profile-form {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+            font-weight: bold;
+        }
+
+        input[type="text"],
+        input[type="tel"],
+        input[type="number"],
+        select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+            box-sizing: border-box;
+        }
+
+        .subject-experience {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-top: 10px;
+        }
+
+        .subject-box {
+            padding: 10px;
+            background: #f8f8f8;
+            border-radius: 5px;
+        }
+
+        .profile-picture {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .profile-picture img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 10px;
+            border: 3px solid teal;
+        }
+
+        .submit-btn {
+            background: teal;
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 16px;
+            margin-top: 20px;
+        }
+
+        .submit-btn:hover {
+            background: #006666;
+        }
+
+        @media (max-width: 768px) {
+            
+            .main-content { 
+                padding: 15px;
+            }
+            .subject-experience {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <h1><span class="edu">🍃Edu</span>Connect</h1>
+        <ul>
+            <li><i class="fas fa-home"></i><a href="home.html" style="text-decoration: none; color: inherit;">Home</a></li>
+        </ul>
+    </nav>
+        <div class="main-content">
+        <h2>Complete Your Profile</h2>
+        <form class="profile-form" id="teacherProfileForm">
+            <div class="profile-picture">
+                <img id="profilePreview" src="https://via.placeholder.com/150" alt="Profile Preview">
+                <input type="file" id="profilePicture" accept="image/*" style="display: none;">
+                <button type="button" onclick="document.getElementById('profilePicture').click()" 
+                        style="background: #f0f0f0; padding: 8px 15px; border: 1px solid #ddd; border-radius: 5px; cursor: pointer;">
+                    Upload Photo
+                </button>
+            </div>
+
+            <div class="form-group">
+                <label for="fullName">Full Name</label>
+                <input type="text" id="fullName" name="fullName" required>
+            </div>
+
+            <div class="form-group">
+                <label for="qualification">Educational Qualification</label>
+                <input type="text" id="qualification" name="qualification" required>
+            </div>
+            <div class="form-group">
+                <label for="currentWork">Currently Working At</label>
+                <input type="text" id="currentWork" name="currentWork" placeholder="Current Institution Name" required>
+            </div>
+            <div class="form-group">
+                <label for="workedAt">Previous Work Experience</label>
+                <div id="workExperienceContainer">
+                    <div class="work-entry" style="display: flex; gap: 10px; margin-bottom: 10px;">
+                        <input type="text" placeholder="Institution Name" 
+                               style="flex: 2;" required>
+                        <input type="number" placeholder="Years" min="0" max="50" 
+                               style="flex: 1;" required>
+                        <button type="button" class="remove-work" 
+                                style="background: #ff4444; color: white; border: none; 
+                                       border-radius: 5px; padding: 0 15px; cursor: pointer;"
+                                onclick="this.parentElement.remove()">×</button>
+                    </div>
+                </div>
+                <button type="button" 
+                        style="background: #4CAF50; color: white; border: none; 
+                               border-radius: 5px; padding: 8px 15px; margin-top: 10px; 
+                               cursor: pointer;"
+                        onclick="addWorkExperience()">
+                    + Add Another Institution
+                </button>
+            </div>
+            <div class="form-group">
+                <label>Years of Experience by Subject</label>
+                <div class="subject-experience">
+                    <div class="subject-box">
+                        <label for="mathsExp">Mathematics</label>
+                        <input type="number" id="mathsExp" name="mathsExp" min="0" max="50">
+                    </div>
+                    <div class="subject-box">
+                        <label for="physicsExp">Physics</label>
+                        <input type="number" id="physicsExp" name="physicsExp" min="0" max="50">
+                    </div>
+                    <div class="subject-box">
+                        <label for="chemistryExp">Chemistry</label>
+                        <input type="number" id="chemistryExp" name="chemistryExp" min="0" max="50">
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="phone">Phone Number</label>
+                <input type="tel" id="phone" name="phone" pattern="[0-9]{10}" required>
+            </div>
+
+            <button type="submit" class="submit-btn">Save Profile</button>
+        </form>
+    </div>
+
+    <script>
+        // Profile picture preview
+        document.getElementById('profilePicture').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    document.getElementById('profilePreview').src = e.target.result;
+                }
+                reader.readAsDataURL(file);
+            }
+        });
+    
+        // Add work experience entry
+        function addWorkExperience() {
+            const container = document.getElementById('workExperienceContainer');
+            const workEntry = document.createElement('div');
+            workEntry.className = 'work-entry';
+            workEntry.style = 'display: flex; gap: 10px; margin-bottom: 10px;';
+            
+            workEntry.innerHTML = `
+                <input type="text" placeholder="Institution Name" style="flex: 2;" required>
+                <input type="number" placeholder="Years" min="0" max="50" style="flex: 1;" required>
+                <button type="button" class="remove-work" 
+                        style="background: #ff4444; color: white; border: none; 
+                               border-radius: 5px; padding: 0 15px; cursor: pointer;"
+                        onclick="this.parentElement.remove()">×</button>
+            `;
+            
+            container.appendChild(workEntry);
+        }
+    
+        // Form validation
+        function validateForm() {
+            const phone = document.getElementById('phone').value;
+            if (!/^\d{10}$/.test(phone)) {
+                alert('Please enter a valid 10-digit phone number');
+                return false;
+            }
+            
+            const subjects = ['mathsExp', 'physicsExp', 'chemistryExp'];
+            for (let subject of subjects) {
+                const years = document.getElementById(subject).value;
+                if (years && (years < 0 || years > 50)) {
+                    alert('Years of experience must be between 0 and 50');
+                    return false;
+                }
+            }
+            return true;
+        }
+    // Replace the existing form submission handler
+document.getElementById('teacherProfileForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    
+    if (!validateForm()) return;
+
+    const formData = {
+        fullName: document.getElementById('fullName').value,
+        qualification: document.getElementById('qualification').value,
+        currentWork: document.getElementById('currentWork').value,
+        phone: document.getElementById('phone').value,
+        workExperience: Array.from(document.querySelectorAll('.work-entry')).map(entry => ({
+            institution: entry.querySelector('input[type="text"]').value,
+            years: parseInt(entry.querySelector('input[type="number"]').value)
+        })),
+        subjectExperience: {
+            mathematics: parseInt(document.getElementById('mathsExp').value) || 0,
+            physics: parseInt(document.getElementById('physicsExp').value) || 0,
+            chemistry: parseInt(document.getElementById('chemistryExp').value) || 0
+        },
+        profilePicture: document.getElementById('profilePreview').src,
+        user: localStorage.getItem('userID') // Add user ID from localStorage
+    };
+
+    try {
+        const response = await fetch('http://localhost:3000/api/teacher/profile', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${localStorage.getItem('token')}`
+            },
+            body: JSON.stringify(formData)
+        });
+
+        const result = await response.json();
+        
+        if (result.success) {
+            // Store the teacher ID in localStorage
+            localStorage.setItem('teacherId', result.teacherId);
+            alert('Profile saved successfully!');
+            window.location.href = 'teacher_dash.html';
+        } else {
+            alert('Error saving profile: ' + result.message);
+        }
+    } catch (error) {
+        console.error('Error:', error);
+        alert('Error saving profile. Please try again.');
+    }
+});
+    </script>
+</body>
+</html>

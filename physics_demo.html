@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Physics Demo Classes | EduConnect</title>
+    <style>
+        /* Copy existing styles from democlass.html */
+        /* Add grid layout styles */
+        .videos-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            padding: 20px 0;
+        }
+
+        .video-container {
+            background: white;
+            border-radius: 10px;
+            padding: 15px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .video-player iframe {
+            width: 100%;
+            aspect-ratio: 16/9;
+        }
+    </style>
+</head>
+<body>
+    <!-- Copy sidebar from democlass.html -->
+    <div class="main-content">
+        <h2>Physics Demo Classes</h2>
+        <div class="videos-grid">
+            <div class="video-container">
+                <div class="video-player">
+                    <iframe src="https://www.youtube.com/embed/ZM8ECpBuQYE" 
+                        title="Newton's Laws" allowfullscreen></iframe>
+                </div>
+                <h3 class="video-title">Newton's Laws of Motion</h3>
+                <p class="video-description">Basic principles of motion and forces.</p>
+            </div>
+            
+            <div class="video-container">
+                <div class="video-player">
+                    <iframe src="https://www.youtube.com/embed/CWxwrEXJ8kc" 
+                        title="Gravity" allowfullscreen></iframe>
+                </div>
+                <h3 class="video-title">Understanding Gravity</h3>
+                <p class="video-description">Gravitational forces and their effects.</p>
+            </div>
+
+            <div class="video-container">
+                <div class="video-player">
+                    <iframe src="https://www.youtube.com/embed/PUZkE_0T0Ls" 
+                        title="Waves" allowfullscreen></iframe>
+                </div>
+                <h3 class="video-title">Wave Motion</h3>
+                <p class="video-description">Introduction to waves and their properties.</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
